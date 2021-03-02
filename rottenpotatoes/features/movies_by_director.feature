@@ -13,6 +13,14 @@ Background: movies in database
   | Alien        | R      |              |   1979-05-25 |
   | THX-1138     | R      | George Lucas |   1971-03-11 |
 
+Scenario: create a new movie
+  Given I am on the RottenPotatoes home page
+  When I follow "Add new movie"
+  And I fill in "Title" with "Test Movie"
+  And I press "Save Changes"
+  When I am on the RottenPotatoes home page
+  And   I should see "Test Movie"
+
 Scenario: add director to existing movie
   When I go to the edit page for "Alien"
   And  I fill in "Director" with "Ridley Scott"
@@ -32,3 +40,4 @@ Scenario: can't find similar movies if we don't know director (sad path)
   When  I follow "Find Movies With Same Director"
   Then  I should be on the home page
   And   I should see "'Alien' has no director info"
+
